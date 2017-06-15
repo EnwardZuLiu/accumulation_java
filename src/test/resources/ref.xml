@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<developer_platform xmlns="http://www.bioCloud.net/developer_platform.xsd"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://www.bioCloud.net/developer_platform.xsd developer_platform.xsd">
+
+    <web_ui>
+        <!-- 原始数据 -->
+        <!--
+            tab_name 表示选项卡的名称
+            order 表示该元素在该选项卡的位置
+            data_type 表示原始数据的数据类型
+            data_format 标示原始数据是单端还是双端
+         -->
+        <radios id="qphred" name="qphred" order="3" tab_name="综合选项">
+            <label>Qphred</label>
+            <description>这里使用来显示说明文字的</description>
+
+            <!--
+                checked 表示该单选框是被默认选中的
+             -->
+            <radio checked="true" name="33">33</radio>
+            <radio name="66" value="66"/>
+        </radios>
+        <raw_data id="raw" name="raw" order="1" tab_name="原始数据选择" data_type="fastq" data_format="double">
+            <label>原始数据</label>
+            <description>这里选用的是fastq文件</description>
+        </raw_data>
+
+        <!-- 单选框组 -->
+        <radios id="qphred1" name="qphred" order="3" tab_name="综合选项">
+            <label>Qphred</label>
+            <description>这里使用来显示说明文字的</description>
+
+            <!--
+                checked 表示该单选框是被默认选中的
+             -->
+            <radio checked="true" name="33">33</radio>
+            <radio name="66" value="66"/>
+        </radios>
+        <input id="project_name1" name="project_name" order="2" tab_name="综合选项" disable="false" placeholder="请输入项目名称">
+            <label>项目名称</label>
+            <description>您能修改项目名称，但是只能输入中文、字母、数字、下划线，且50个字符以内。</description>
+
+            <!-- 输入框的默认值，可以为空 -->
+            <value>有参考基因组的转录组分析项目</value>
+        </input>
+        <radios id="lib_type" name="lib_type" order="4" tab_name="综合选项">
+            <label>lib_type</label>
+            <description>这里使用来显示说明文字的</description>
+            <radio checked="true" name="fr-unstranded">fr-unstranded</radio>
+            <radio name="fr-firststrand" value="fr-firststrand"/>
+            <radio name="fr-secondstrand" value="fr-secondstrand"/>
+        </radios>
+
+        <!-- 文本输入框 -->
+        <!--
+            disable 表示用户是否可以修改
+            placeholder 水印提示信息
+         -->
+        <input id="project_name2" name="project_name" order="2" tab_name="综合选项" disable="false" placeholder="请输入项目名称">
+            <label>项目名称</label>
+            <description>您能修改项目名称，但是只能输入中文、字母、数字、下划线，且50个字符以内。</description>
+
+            <!-- 输入框的默认值，可以为空 -->
+            <value>有参考基因组的转录组分析项目</value>
+        </input>
+
+        <!-- 下拉框 -->
+        <select id="version1" name="version" order="1" tab_name="综合选项">
+            <option selected="true" value="v2.0">v2.0</option>
+            <option value="v1.0">v1.0</option>
+        </select>
+
+        <input id="project_name3" name="project_name" order="2" tab_name="综合选项" disable="false" placeholder="请输入项目名称">
+            <label>项目名称</label>
+            <description>您能修改项目名称，但是只能输入中文、字母、数字、下划线，且50个字符以内。</description>
+
+            <!-- 输入框的默认值，可以为空 -->
+            <value>有参考基因组的转录组分析项目</value>
+        </input>
+
+        <group>
+            <select id="reference_species" name="reference_species" order="1" tab_name="基因功能注释">
+                <option selected="true" value="Phaeodactylum_tricornutum">三角褐指藻(Phaeodactylum_tricornutum)</option>
+                <option value="Pichia_kudriavzevii">东方伊萨酵母(Pichia_kudriavzevii)</option>
+                <option value="Pelodiscus_sinensis">中华鳖(Pelodiscus_sinensis)</option>
+                <option value="Salvia_miltiorrhiza">丹参(Salvia_miltiorrhiza)</option>
+                <option value="Gossypium_arboreum">亚洲棉(Gossypium_arboreum)</option>
+                <option value="Pichia_and_Saccharomyces">伊萨_酿酒酵母(Pichia_and_Saccharomyces)</option>
+            </select>
+            <select id="species_version" name="version" order="2" tab_name="基因功能注释" dependency="reference_species">
+                <option selected="true">Phatr2</option>
+            </select>
+        </group>
+        <select id="version5" name="version" order="1" tab_name="综合选项">
+            <option selected="true" value="v2.0">v2.0</option>
+            <option value="v1.0">v1.0</option>
+        </select>
+
+        <!-- 单选框 -->
+        <input id="qphred3" name="qphred" order="1" tab_name="差异表达分析">
+            <label>差异表达分析 FDR(False Discovery Rate)</label>
+            <description>错误发现率，FDR阈值越低表示差异表达筛选越严格，筛选出来的差异表达结果越少，默认设置为0.01</description>
+            <value>0.01</value>
+        </input>
+        <input id="qphred4" name="qphred" order="2" tab_name="差异表达分析">
+            <label>差异筛选倍数阈值</label>
+            <description>在对照组与实验组中，如果基因的表达量差异倍数超过此阈值，则认为该基因为差异表达的基因，默认设置为2</description>
+            <value>2</value>
+        </input>
+
+        <!-- 差异分组 -->
+        <difference_grouping id="differential_expression_analysis" name="differential_expression_analysis" order="3"
+                             tab_name="差异表达分析">
+            <dependency>raw</dependency>
+            <select_name_one>对照</select_name_one>
+            <select_name_two>实验</select_name_two>
+            <validation_rules>A</validation_rules>
+        </difference_grouping>
+    </web_ui>
+
+    <data_nodes>
+        <data_node id="databasePath" name="databasePath" strategy="base" parameterType="value_class" target="metadata"
+                   value="/share/biocloud-compute/genome_database">
+        </data_node>
+        <data_node id="AnnoDatabasePath" name="AnnoDatabasePath" strategy="base" parameterType="value_class"
+                   target="metadata" value="/share/biocloud-compute/anno_database">
+        </data_node>
+        <data_node id="project_name" name="project_name" strategy="base" parameterType="value_class" target="parameter_json"
+                   value="demo">
+            <source>project_name</source>
+        </data_node>
+        <data_node id="projectId" name="projectId" strategy="base" parameterType="value_class" target="metadata"
+                   value="402888a3576951e201576952be4b0000"></data_node>
+        <data_node id="version" name="version" strategy="base" parameterType="value_class" target="metadata"
+                   value="v2.0"></data_node>
+        <data_node id="targetFolderUuid" name="targetFolderUuid" strategy="base" parameterType="value_class"
+                   target="metadata" value="89bc8442-a203-4ad2-bea6-46a6b890cba1"></data_node>
+
+        <data_node id="Project_name" name="Project_id" strategy="base" parameterType="value_class" classType="string"
+                   target="parameter_json">
+            <source>project_name</source>
+        </data_node>
+        <data_node id="Species" name="Species" strategy="base" parameterType="value_class" classType="string"
+                   target="parameter_json" value="Arabidopsis_thaliana"></data_node>
+        <data_node id="Genome_version" name="Genome_version" strategy="base" parameterType="value_class"
+                   classType="string" target="parameter_json" value="TAIR10"></data_node>
+        <data_node id="FDR" name="FDR" strategy="base" parameterType="value_class" classType="string"
+                   target="parameter_json" value="0.01"></data_node>
+        <data_node id="fold" name="fold" strategy="base" parameterType="value_class" classType="string"
+                   target="parameter_json" value="2"></data_node>
+        <data_node id="Download" name="Download" strategy="base" parameterType="value_class" classType="string"
+                   target="parameter_json" value="ftp://ftp.genome.arizona.edu/pub/fpc/maize/"></data_node>
+        <data_node id="sampleName" name="sampleName" strategy="base" parameterType="value_class"
+                   classType="string_array" target="parameter_json" value="T01,T02,T03,T04,T05,T06"></data_node>
+        <data_node id="Com" name="Com" strategy="DifferenceGrouping" parameterType="value_class" classType="string_array"
+                   target="parameter_json">
+            <source>differential_expression_analysis</source>
+        </data_node>
+        <data_node id="Sep" name="Sep" strategy="DifferenceGrouping" parameterType="value_class" classType="string_array"
+                   target="parameter_json">
+            <source>differential_expression_analysis</source>
+        </data_node>
+        <data_node id="Project_key" name="Project_key" strategy="base" parameterType="value_class" classType="string"
+                   target="parameter_json" value="Arabidopsis_thaliana"></data_node>
+        <data_node id="anno_db" name="anno_db" strategy="base" parameterType="value_class" classType="string_array"
+                   target="parameter_json"
+                   value="/share/nas2/database/ncbi/Nt_Nr_division/nr_PLN,/share/nas2/database/kegg/kegg_divide/Plants.fa,/share/nas2/database/uniprot/knowledgebase/current/TrEMBL_Divide/uniprot_sprot_plants.fasta"></data_node>
+        <data_node id="Lib_type" name="Lib_type" strategy="base" parameterType="value_class" classType="string"
+                   target="parameter_json" value="fr-unstranded"></data_node>
+        <data_node id="r1_fqs" name="r1_fqs" strategy="RawData" parameterType="value_class_size" classType="File_Array"
+                   target="parameter_json">
+            <source>raw</source>
+        </data_node>
+        <data_node id="r2_fqs" name="r2_fqs" strategy="RawData" parameterType="value_class_size" classType="File_Array"
+                   target="parameter_json">
+            <source>raw</source>
+        </data_node>
+        <data_node id="Kmean" name="Kmean" strategy="base" parameterType="value_class" classType="string_array"
+                   target="parameter_json" value=""></data_node>
+        <data_node id="Basecall_stat" name="Basecall_stat" strategy="base" parameterType="value_class" classType="File"
+                   target="parameter_json" value=""></data_node>
+
+
+    </data_nodes>
+</developer_platform>

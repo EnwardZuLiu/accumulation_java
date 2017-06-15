@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.bioCloud.net/developer_platform.xsd"
+           targetNamespace="http://www.bioCloud.net/developer_platform.xsd"
+           elementFormDefault="qualified">
+    <xs:element name="developer_platform">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="web_ui" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="data_nodes" minOccurs="1" maxOccurs="1"/>
+            </xs:all>
+        </xs:complexType>
+        <xs:unique name="developer_platform_unique">
+            <xs:selector xpath=".//*"/>
+            <xs:field xpath="@id"/>
+        </xs:unique>
+        <!-- 外键约束，这里不需要存在外键约束 -->
+        <!--<xs:key name="developer_platform_key">-->
+            <!--<xs:selector xpath=".//*"/>-->
+            <!--<xs:field xpath="@id"/>-->
+        <!--</xs:key>-->
+        <!--<xs:keyref refer="developer_platform_key" name="developer_platform_refer">-->
+            <!--<xs:selector xpath=".//*"/>-->
+            <!--<xs:field xpath="source"/>-->
+        <!--</xs:keyref>-->
+    </xs:element>
+    <xs:element name="web_ui">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="raw_data"/>
+                    <xs:element ref="radios"/>
+                    <xs:element ref="select"/>
+                    <xs:element ref="group"/>
+                    <xs:element ref="input"/>
+                    <xs:element ref="difference_grouping"/>
+                </xs:choice>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="raw_data">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="label"/>
+                <xs:element ref="description"/>
+            </xs:all>
+            <xs:attribute name="data_type" use="optional" default="fastq" type="xs:NCName"/>
+            <xs:attribute name="data_format" use="optional" default="double">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NCName">
+                        <xs:enumeration value="double"/>
+                        <xs:enumeration value="single"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="name" use="optional" type="xs:NCName"/>
+            <xs:attribute name="order" use="required" type="xs:integer"/>
+            <xs:attribute name="tab_name" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="radios">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="label"/>
+                <xs:element ref="description"/>
+                <xs:element maxOccurs="unbounded" ref="radio"/>
+            </xs:sequence>
+            <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="name" use="optional" type="xs:NCName"/>
+            <xs:attribute name="order" use="required" type="xs:integer"/>
+            <xs:attribute name="tab_name" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="radio">
+        <xs:complexType mixed="true">
+            <xs:attribute name="checked" type="xs:boolean"/>
+            <xs:attribute name="name" use="optional" type="xs:string"/>
+            <xs:attribute name="value" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="group">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:any maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="input">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="label"/>
+                <xs:element ref="description"/>
+                <xs:element ref="value"/>
+            </xs:all>
+            <xs:attribute name="disable" type="xs:boolean"/>
+            <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="name" use="optional" type="xs:NCName"/>
+            <xs:attribute name="order" use="required" type="xs:integer"/>
+            <xs:attribute name="placeholder" type="xs:NCName"/>
+            <xs:attribute name="tab_name" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="value" type="xs:string"/>
+    <xs:element name="difference_grouping">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="dependency"/>
+                <xs:element ref="select_name_one"/>
+                <xs:element ref="select_name_two"/>
+                <xs:element ref="validation_rules"/>
+            </xs:all>
+            <xs:attribute name="id" use="required"/>
+            <xs:attribute name="name" use="optional"/>
+            <xs:attribute name="order" use="required" type="xs:integer"/>
+            <xs:attribute name="tab_name" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="dependency" type="xs:NCName"/>
+    <xs:element name="select_name_one" type="xs:NCName"/>
+    <xs:element name="select_name_two" type="xs:NCName"/>
+    <xs:element name="validation_rules" type="xs:NCName"/>
+    <xs:element name="data_nodes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="data_node"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="data_node">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" ref="source"/>
+            </xs:sequence>
+            <xs:attribute name="classType">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NCName">
+                        <xs:enumeration value="boolean"/>
+                        <xs:enumeration value="int"/>
+                        <xs:enumeration value="string"/>
+                        <xs:enumeration value="file"/>
+                        <xs:enumeration value="File"/>
+                        <xs:enumeration value="boolean_array"/>
+                        <xs:enumeration value="int_array"/>
+                        <xs:enumeration value="string_array"/>
+                        <xs:enumeration value="File_Array"/>
+                        <xs:enumeration value="directory"/>
+                        <xs:enumeration value="directory_array"/>
+                        <xs:enumeration value="filepath"/>
+                        <xs:enumeration value="filepath_array"/>
+                        <xs:enumeration value="files3key"/>
+                        <xs:enumeration value="files3key_array"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="name" use="optional" type="xs:NCName"/>
+            <xs:attribute name="parameterType" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NCName">
+                        <xs:enumeration value="value_class_size"/>
+                        <xs:enumeration value="value_class"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="strategy" use="required" type="xs:NCName"/>
+            <xs:attribute name="target" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NCName">
+                        <xs:enumeration value="metadata"/>
+                        <xs:enumeration value="parameter_json"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="value" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="source" type="xs:NCName"/>
+    <xs:element name="label" type="xs:string"/>
+    <xs:element name="description" type="xs:string"/>
+    <xs:element name="select">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="option"/>
+            </xs:sequence>
+            <xs:attribute name="dependency" type="xs:NCName"/>
+            <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="name" use="optional" type="xs:NCName"/>
+            <xs:attribute name="order" use="required" type="xs:integer"/>
+            <xs:attribute name="tab_name" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="option">
+        <xs:complexType mixed="true">
+            <xs:attribute name="selected" type="xs:boolean"/>
+            <xs:attribute name="value" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
