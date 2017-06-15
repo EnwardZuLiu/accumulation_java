@@ -16,12 +16,12 @@
         </xs:unique>
         <!-- 外键约束，这里不需要存在外键约束 -->
         <!--<xs:key name="developer_platform_key">-->
-            <!--<xs:selector xpath=".//*"/>-->
-            <!--<xs:field xpath="@id"/>-->
+        <!--<xs:selector xpath=".//*"/>-->
+        <!--<xs:field xpath="@id"/>-->
         <!--</xs:key>-->
         <!--<xs:keyref refer="developer_platform_key" name="developer_platform_refer">-->
-            <!--<xs:selector xpath=".//*"/>-->
-            <!--<xs:field xpath="source"/>-->
+        <!--<xs:selector xpath=".//*"/>-->
+        <!--<xs:field xpath="source"/>-->
         <!--</xs:keyref>-->
     </xs:element>
     <xs:element name="web_ui">
