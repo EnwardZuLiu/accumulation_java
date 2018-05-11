@@ -44,16 +44,12 @@ public class RxjavaTest {
      * 用来测试 RXJAVA
      * @param args 命令行参数
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("C");
         test1();
         System.out.println("B");
-        try {
-            System.out.println(Thread.currentThread().getName());
-            Thread.sleep(2000l);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.currentThread().join(2000l); // 等待调用线程完成，之后推出
+        System.out.println("D");
     }
 
 }

@@ -162,7 +162,7 @@
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>true</failsOnError>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                            <includes>xyz.liuzm.accumulation</includes>
+                            <!--<includes>xyz.liuzm.accumulation.*</includes>-->
                         </configuration>
                     </execution>
                 </executions>
